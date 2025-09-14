@@ -22,6 +22,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.AnimatedStateListDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.UserHandle
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -478,7 +479,10 @@ fun BrightnessSlider(
                     }
 
                     button.setColorFilter(autoBrightnessIconTint.toArgb(), PorterDuff.Mode.SRC_IN)
-                    button.setOnClickListener { coroutineScope.launch { onIconClick() } }
+                    button.setOnClickListener {
+                        button.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        coroutineScope.launch { onIconClick() }
+                    }
                 }
             )
         }
