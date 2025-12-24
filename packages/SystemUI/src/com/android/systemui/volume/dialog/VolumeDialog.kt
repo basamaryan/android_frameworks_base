@@ -122,6 +122,11 @@ constructor(
         setCanceledOnTouchOutside(false)
     }
 
+    override fun onStop() {
+        super.onStop()
+        context.contentResolver.unregisterContentObserver(volumePanelOnLeftObserver)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isVolumeDialogVertical) {
